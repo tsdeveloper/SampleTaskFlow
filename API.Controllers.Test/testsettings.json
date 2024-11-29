@@ -1,0 +1,11 @@
+{
+  "ConnectionStrings": {
+    "DEV-DOCKER-SQLSERVER": "temp_ebookstore"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
