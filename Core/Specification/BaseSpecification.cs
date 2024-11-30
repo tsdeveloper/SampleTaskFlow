@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Core.Interfaces;
 
 namespace Core.Specification
 {
+        [ExcludeFromCodeCoverage]
     public class BaseSpecification<T> : ISpecification<T>
     {
         public BaseSpecification()

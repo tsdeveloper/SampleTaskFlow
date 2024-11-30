@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 using Infra.Converters;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Config
 {
+        [ExcludeFromCodeCoverage]
     public class ProjectConfig : IEntityTypeConfiguration<Project>
     {
         public void Configure(EntityTypeBuilder<Project> b)

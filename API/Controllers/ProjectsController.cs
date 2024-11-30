@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using API.Errors;
 using AutoMapper;
 using Core.DTOs.Assuntos;
@@ -13,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+        [ExcludeFromCodeCoverage]
+
     [Route("api/[controller]")]
     public class ProjectsController : BaseApiController
     {
@@ -112,8 +115,7 @@ namespace API.Controllers
             if (!validator.IsValid)
                 return BadRequest(new ApiResponse(400, validator.Errors.FirstOrDefault().ErrorMessage));
 
-            var project = _mapper.Map<Project>(dto);
-            var result = await _serviceProject.UpdateProjectAsync(id, project);
+            var result = await _serviceProject.UpdateProjectAsync(id, dto);
 
             if (result.Error != null) return BadRequest(new ApiResponse(400, result.Error.Message));
             return NoContent();

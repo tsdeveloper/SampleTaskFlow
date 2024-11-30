@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 
 namespace Core.Specification.Tasks.SpecParams
 {
+        [ExcludeFromCodeCoverage]
     public class TaskSpecParams : BaseSpecParams
     {
         public int? Id { get; set; }

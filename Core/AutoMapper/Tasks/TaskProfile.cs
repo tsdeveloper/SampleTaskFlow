@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Core.DTOs.Tasks;
 
 namespace Core.AutoMapper.Tasks
 {
+    [ExcludeFromCodeCoverage]
     public class TaskProfile : Profile
     {
         public TaskProfile()

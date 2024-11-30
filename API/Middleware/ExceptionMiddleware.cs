@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using API.Errors;
 using Newtonsoft.Json;
 
 namespace API.Middleware
 {
+    [ExcludeFromCodeCoverage]
     public class ExceptionMiddleware
     {
         private readonly IHostEnvironment _env;

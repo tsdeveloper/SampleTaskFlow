@@ -1,0 +1,13 @@
+@API_HostAddress = http://localhost:7001/api
+@Id =4
+PUT {{API_HostAddress}}/projects/{{Id}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": {{Id}},
+  "name": "project 4 update",
+  "userId": {{Id}},
+  "status": 1
+}
+###

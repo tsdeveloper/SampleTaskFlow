@@ -1,5 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Core.DTOs
 {
+        [ExcludeFromCodeCoverage]
+
     public class GenericResponse<T>
     {
         public MessageResponse Error { get; set; }

@@ -12,13 +12,13 @@ namespace API.Controllers.Test.API
 {
     public class TaskControllerTest : BaseTestService
     {
-        private TaskController _TaskController;
+        private TasksController _TaskController;
         private readonly BaseTestService _baseTestService;
 
         public TaskControllerTest()
         {
 
-            _TaskController = new TaskController(_genericMockTask.Object,
+            _TaskController = new TasksController(_genericMockTask.Object,
             _serviceTask,
             _repoMockMapper.Object,
             _validatorMockTaskCreateDto.Object,
@@ -31,7 +31,7 @@ namespace API.Controllers.Test.API
         }
 
         [Fact]
-        public async System.Threading.Tasks.Task Step_01_TaskEncontrado_GetController()
+        public async Task Step_01_TaskEncontrado_GetController()
         {
             _genericMockTask.MockGetEntityWithSpec(new TaskBuilder().Default().Build());
 
@@ -40,7 +40,7 @@ namespace API.Controllers.Test.API
             var resultMapperTask = new TaskReturnDtoBuilder().Default().Build();
 
             _repoMockMapper.Setup(mapper => mapper.Map<TaskReturnDto>(It.IsAny<Core.Entities.Task>()))
-    .Returns(resultMapperTask);
+                        .Returns(resultMapperTask);
 
             var result = await _TaskController.GetDetailsById(request.TaskId);
 

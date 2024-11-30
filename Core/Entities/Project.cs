@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Core.Entities
 {
   public enum EProjectStatusType
@@ -7,6 +10,8 @@ namespace Core.Entities
     COMPLETED,
     CANCELED,
   }
+      [ExcludeFromCodeCoverage]
+
   public class Project : BaseEntity
   {
     public Project()
@@ -17,6 +22,7 @@ namespace Core.Entities
     {
       ProjectId = projectId;
     }
+    [Key]
     public int ProjectId { get; set; }
     public string ProjectName { get; set; }
     public int ProjectUserId { get; set; }

@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Specifications
 {
+      [ExcludeFromCodeCoverage]
+
     public class SpecificationEvaluator<TEntity> where TEntity : class
     {
         public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery,

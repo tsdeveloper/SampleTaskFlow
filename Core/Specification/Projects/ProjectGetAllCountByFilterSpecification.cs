@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 using Core.Specification.Projects.SpecParams;
 
 namespace Core.Specification.Projects
 {
+        [ExcludeFromCodeCoverage]
     public class ProjectGetAllCountByFilterSpecification : BaseSpecification<Project>
     {
         public ProjectGetAllCountByFilterSpecification(ProjectSpecParams specParams)

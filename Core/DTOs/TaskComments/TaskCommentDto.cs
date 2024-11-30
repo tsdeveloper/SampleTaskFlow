@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.DTOs.Tasks;
 
 namespace Core.DTOs.Autors
 {
+    [ExcludeFromCodeCoverage]
     public class TaskCommentReturnDto
     {
         public int Id { get; set; }
@@ -9,6 +11,7 @@ namespace Core.DTOs.Autors
         public string Description { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class TaskCommentFullReturnDto
     {
         public int Id { get; set; }
@@ -17,12 +20,14 @@ namespace Core.DTOs.Autors
         public TaskReturnDto Task { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class TaskCommentCreateDto
     {
         public int TaskId { get; set; }
         public string Description { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class TaskCommentUpdateDto
     {
         public int Id { get; set; }

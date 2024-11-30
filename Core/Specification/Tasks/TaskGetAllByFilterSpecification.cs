@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Specification.Tasks.SpecParams;
 
 namespace Core.Specification.Tasks
 {
+        [ExcludeFromCodeCoverage]
     public class TaskGetAllByFilterSpecification : BaseSpecification<Entities.Task>
     {
         public TaskGetAllByFilterSpecification(TaskSpecParams specParams)

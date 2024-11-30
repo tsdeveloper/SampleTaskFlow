@@ -1,0 +1,11 @@
+dotnet test --collect:"XPlat Code Coverage"
+
+dotnet-coverage merge cobertura "dotnet run -p API.Controllers.Test"
+dotnet-coverage merge cobertura "dotnet run -p API.Controllers.Test"
+
+dotnet-coverage collect dotnet test -f xml -o coverage.xml
+
+
+reportgenerator "-reports:./API.Controllers.Test/TestResults/1854a64d-fdea-4196-8394-0353656d8e7d/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+
+aa6968ca-9d41-47af-9855-fb886442f8c5

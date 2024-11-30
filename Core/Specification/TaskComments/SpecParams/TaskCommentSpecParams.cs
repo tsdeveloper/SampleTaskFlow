@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Core.Specification.TaskComments.SpecParams
 {
+        [ExcludeFromCodeCoverage]
     public class TaskCommentSpecParams : BaseSpecParams
     {
         public int? Id { get; set; }

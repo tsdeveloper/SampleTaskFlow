@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 using Core.Specification.TaskComments.SpecParams;
 
 namespace Core.Specification.TaskComments
 {
+        [ExcludeFromCodeCoverage]
     public class TaskCommentGetAllByFilterSpecification : BaseSpecification<TaskComment>
     {
         public TaskCommentGetAllByFilterSpecification(TaskCommentSpecParams specParams)

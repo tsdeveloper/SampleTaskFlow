@@ -1,0 +1,14 @@
+@API_HostAddress = http://localhost:7001/api
+### GET ALL
+GET {{API_HostAddress}}/tasks?pageIndex=1&pageSize=6&sort=asc&search=
+Accept: application/json
+Content-Type: application/json
+
+###
+
+### GET BY ID
+GET {{API_HostAddress}}/tasks/1
+Accept: application/json
+Content-Type: application/json
+
+###

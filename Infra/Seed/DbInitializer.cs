@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Bogus;
 using Core.Entities;
 using Infra.Data;
@@ -7,12 +8,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infra.Seed
 {
+      [ExcludeFromCodeCoverage]
+
     public class DbInitializer
     {
-        public static void InitDb(WebApplication app)
+        public static void InitDb(WebApplication app, bool generateMockSeeds = false)
         {
             using var scope = app.Services.CreateScope();
-            SeedData(scope.ServiceProvider.GetService<SampleTaskFlowContext>());
+            SeedData(scope.ServiceProvider.GetService<SampleTaskFlowContext>(), generateMockSeeds);
         }
         private static void SeedData(SampleTaskFlowContext context, bool generateMockSeeds = false)
         {
@@ -28,18 +31,17 @@ namespace Infra.Seed
 
         private static void SeedProjectFaker(SampleTaskFlowContext context)
         {
-           var taskList = context.Set<Project>().Take(10);
 
             if (!context.Set<Project>().Any())
             {
                 var fakerId = 1;
                 var fakers = new Faker<Project>()
-                 .CustomInstantiator(o => new Project(fakerId++))
+                //  .CustomInstantiator(o => new Project(fakerId++))
                     .RuleFor(o => o.ProjectName, f => f.Company.CompanySuffix())
                     .RuleFor(o => o.ProjectStatus, f => f.PickRandom<EProjectStatusType>())
                     .RuleFor(o => o.ProjectUserId, f => f.Random.Int(1, 10))
                     .RuleFor(o => o.ProjectMaxLimitTask, f => 20)
-                    .Generate(25);
+                    .Generate(1);
 
                 context.AddRange(fakers);
                 context.SaveChanges();
@@ -58,7 +60,7 @@ namespace Infra.Seed
 
                 var fakerId = 1;
                 var fakers = new Faker<TaskComment>()
-                 .CustomInstantiator(o => new TaskComment(fakerId++))
+                //  .CustomInstantiator(o => new TaskComment(fakerId++))
                     .RuleFor(o => o.TaskCommentDescription, f => f.Commerce.Department())
                     .RuleFor(o => o.TaskId, f => f.Random.Int(rangeMin, rangeMax))
                     .Generate(25);
@@ -77,13 +79,14 @@ namespace Infra.Seed
                 int rangeMax = projects.Select(x => x.ProjectId).Max();
                 var fakerId = 1;
                 var fakers = new Faker<Core.Entities.Task>()
-                 .CustomInstantiator(o => new Core.Entities.Task(fakerId++))
+                //  .CustomInstantiator(o => new Core.Entities.Task(fakerId++))
+                    .RuleFor(o => o.CreatedAt, f => f.Date.RecentOffset(20, DateTime.Now.AddDays(-25)).Date)
                     .RuleFor(o => o.TaskName, f => f.Commerce.Department())
                     .RuleFor(o => o.TaskDescription, f => f.Commerce.ProductAdjective())
                     .RuleFor(o => o.TaskPriority, f => f.PickRandom<ETaskPriorityType>())
                     .RuleFor(o => o.TaskStatus, f => f.PickRandom<ETaskStatusType>())
                     .RuleFor(o => o.ProjectId, f => f.Random.Int(rangeMin, rangeMax))
-                    .Generate(25);
+                    .Generate(19);
 
                 context.AddRange(fakers);
                 context.SaveChanges();
@@ -92,3 +95,4 @@ namespace Infra.Seed
         }
     }
 }
+

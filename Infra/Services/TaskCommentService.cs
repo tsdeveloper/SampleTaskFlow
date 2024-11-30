@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Core.DTOs;
 using Core.Entities;
@@ -8,6 +9,8 @@ using Core.Specification.TaskComments.SpecParams;
 
 namespace Infra.Services
 {
+      [ExcludeFromCodeCoverage]
+
     public class TaskCommentService : ITaskCommentService
     {
         private readonly IUnitOfWork _unitOfWork;

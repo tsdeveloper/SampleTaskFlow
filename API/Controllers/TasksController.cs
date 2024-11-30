@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using API.Errors;
 using AutoMapper;
@@ -17,8 +18,9 @@ using PugPdf.Core;
 
 namespace API.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [Route("api/[controller]")]
-    public class TaskController : BaseApiController
+    public class TasksController : BaseApiController
     {
         private readonly IGenericRepository<Core.Entities.Task> _genericTask;
         private readonly ITaskService _serviceTask;
@@ -30,7 +32,7 @@ namespace API.Controllers
         private readonly IProjectRepository _repoProject;
         private readonly ITaskCommentRepository _repoTaskComment;
 
-        public TaskController(IGenericRepository<Core.Entities.Task> genericTask,
+        public TasksController(IGenericRepository<Core.Entities.Task> genericTask,
             ITaskService serviceTask, IMapper mapper, IValidator<TaskCreateDto> validatorTaskCreateDto,
             IValidator<TaskUpdateDto> validatorTaskUpdateDto,
             IConverter converter,
@@ -48,7 +50,7 @@ namespace API.Controllers
             _repoTaskComment = repoTaskComment;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -71,7 +73,7 @@ namespace API.Controllers
                 paramsQuery.PageSize, totalItems, data));
         }
 
-        [HttpGet("details/{id:int}")]
+        [HttpGet("{id:int}")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -151,6 +153,21 @@ namespace API.Controllers
             if (result.Error != null) return BadRequest(new ApiResponse(400, result.Error.Message));
             return NoContent();
 
+        }
+
+        [HttpGet("get-avg-tasks")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<TaskReturnDto>> GetAvgTasksLastThirtyDays()
+        {
+            var result = await _repoTask.GetReportAverrageTaskCompletedLastThirtyDaysAsync();
+
+            return Ok(result);
         }
 
     }

@@ -1,5 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace API.Errors
 {
+    [ExcludeFromCodeCoverage]
+
     public class ApiResponse
     {
      public ApiResponse(int statusCode, string message = null)

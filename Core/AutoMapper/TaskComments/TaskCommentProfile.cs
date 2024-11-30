@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Core.DTOs.Autors;
 using Core.Entities;
 
 namespace Core.AutoMapper.TaskComments
 {
+    [ExcludeFromCodeCoverage]
     public class TaskCommentProfile : Profile
     {
         public TaskCommentProfile()

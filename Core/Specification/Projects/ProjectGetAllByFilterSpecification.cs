@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 using Core.Specification.Projects.SpecParams;
 
 namespace Core.Specification.Projects
 {
+        [ExcludeFromCodeCoverage]
     public class ProjectGetAllByFilterSpecification : BaseSpecification<Project>
     {
         public ProjectGetAllByFilterSpecification(ProjectSpecParams specParams)
@@ -14,6 +16,10 @@ namespace Core.Specification.Projects
         )
         {
             AddOrderby(x => x.ProjectName);
+
+            if (specParams.EnabledIncludeTasks.HasValue && specParams.EnabledIncludeTasks.Value == true)
+                AddInclude(x => x.TaskList);
+
             ApplyPaging(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
 
             if (!string.IsNullOrWhiteSpace(specParams.Sort))

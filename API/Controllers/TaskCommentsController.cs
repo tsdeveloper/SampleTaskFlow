@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using API.Errors;
 using AutoMapper;
 using Core.DTOs.Autors;
@@ -12,8 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+        [ExcludeFromCodeCoverage]
+
     [Route("api/[controller]")]
-    public class TaskCommentController : BaseApiController
+    public class TaskCommentsController : BaseApiController
     {
         private readonly IGenericRepository<TaskComment> _genericTaskComment;
         private readonly ITaskCommentService _serviceTaskComment;
@@ -21,7 +24,7 @@ namespace API.Controllers
         private readonly IValidator<TaskCommentCreateDto> _validatorTaskCommentCreateDto;
         private readonly IValidator<TaskCommentUpdateDto> _validatorTaskCommentUpdateDto;
 
-        public TaskCommentController(IGenericRepository<TaskComment> genericTaskComment,
+        public TaskCommentsController(IGenericRepository<TaskComment> genericTaskComment,
          ITaskCommentService serviceTaskComment, 
          IMapper mapper, 
          IValidator<TaskCommentCreateDto> validatorTaskCommentCreateDto, 

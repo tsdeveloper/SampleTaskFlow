@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Core.DTOs.Assuntos;
 using Core.Entities;
 
 namespace Core.AutoMapper.Projects
 {
+    [ExcludeFromCodeCoverage]
     public class ProjectProfile : Profile
     {
         public ProjectProfile()
@@ -33,15 +35,21 @@ namespace Core.AutoMapper.Projects
                 .ForMember(x => x.ProjectName, o => o.MapFrom(d => d.Name))
                 .ForMember(x => x.ProjectStatus, o => o.MapFrom(d => d.Status))
                 .ForMember(x => x.ProjectUserId, o => o.MapFrom(d => d.UserId))
-                .ForMember(x => x.ProjectMaxLimitTask, o => o.MapFrom(d => d.MaxLimitTask))
                 .ReverseMap();
 
             CreateMap<ProjectUpdateDto, Project>()
+                .ForMember(x => x.ProjectId, o => o.MapFrom(d => d.Id))
+                .ForMember(x => x.ProjectUserId, o => o.MapFrom(d => d.UserId))
                 .ForMember(x => x.ProjectName, o => o.MapFrom(d => d.Name))
                 .ForMember(x => x.ProjectStatus, o => o.MapFrom(d => d.Status))
                 .ForMember(x => x.ProjectUserId, o => o.MapFrom(d => d.UserId))
-                .ForMember(x => x.ProjectMaxLimitTask, o => o.MapFrom(d => d.MaxLimitTask))
                 .ReverseMap();
+
+             CreateMap<Project, Project>()
+             .ForMember(x => x.CreatedAt, d => d.UseDestinationValue())
+             .ForMember(x => x.IsDeleted, d => d.UseDestinationValue())
+             .ForMember(x => x.ProjectCompletedAt, d => d.UseDestinationValue())
+                .ReverseMap();                
         }
     }
 }

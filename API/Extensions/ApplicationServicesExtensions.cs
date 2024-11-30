@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using API.Errors;
+using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 using Core.Interfaces.Repositories.Projects;
 using Core.Interfaces.Repositories.TaskComments;
@@ -11,13 +14,17 @@ using DinkToPdf;
 using DinkToPdf.Contracts;
 using FluentValidation;
 using Infra.Data;
+using Infra.Proxy;
 using Infra.Repositories;
 using Infra.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace API.Extensions
 {
+        [ExcludeFromCodeCoverage]
+
     public static class ApplicationServicesExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, ConfigurationManager configuration)
@@ -26,6 +33,7 @@ namespace API.Extensions
             //var wkHtmlToPdfPath = Path.Combine(Environment.CurrentDirectory, $"wkhtmltox\\v0.12.4\\{architectureFolder}\\libwkhtmltox");
             //CustomAssemblyLoadContext context = new CustomAssemblyLoadContext();
             //context.LoadUnmanagedLibrary(wkHtmlToPdfPath);
+
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
             var IsDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
@@ -48,9 +56,18 @@ namespace API.Extensions
             #endregion
 
             #region Services
+            //     services.AddScoped<ITaskService, TaskServiceProxyLogging>(di => {
+            //         IUnitOfWork unitOfWork = di.GetRequiredService<IUnitOfWork>();
+            //  IMapper mapper = di.GetRequiredService<IMapper>();
+            //  ITaskRepository repoTask = di.GetRequiredService<ITaskRepository>();
+            //  IOptions<AppConfig> optionsAppConfig = di.GetRequiredService<IOptions<AppConfig>>();
+            //                 return new TaskServiceProxyLogging( new TaskService(unitOfWork, mapper, repoTask,  optionsAppConfig),unitOfWork );
+            //     });
+            
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<ITaskCommentService, TaskCommentService>();
             services.AddScoped<IProjectService, ProjectService>();
+
 
             #endregion
 
@@ -72,6 +89,8 @@ namespace API.Extensions
                     });
 
             services.AddValidatorsFromAssembly(Assembly.Load("Core"));
+
+            services.Configure<AppConfig>(configuration.GetSection(nameof(AppConfig)));
 
             return services;
         }

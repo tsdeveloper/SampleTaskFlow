@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Config
 {
+        [ExcludeFromCodeCoverage]
     public class TaskCommentConfig : IEntityTypeConfiguration<TaskComment>
     {
         public void Configure(EntityTypeBuilder<TaskComment> b)

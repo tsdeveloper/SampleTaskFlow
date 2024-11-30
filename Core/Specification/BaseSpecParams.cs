@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 
 namespace Core.Specification
 {
+        [ExcludeFromCodeCoverage]
     public class BaseSpecParams : BaseEntity
     {
       private const int MaxPageSize = 50;
@@ -21,5 +23,7 @@ namespace Core.Specification
                 get => _search;
                 set => _search = value?.ToLower();
             } 
+
+            public bool? EnabledPagination { get; set; }
     }
 }

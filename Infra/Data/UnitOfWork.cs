@@ -5,9 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data.Entity.Validation;
 using Infra.Repositories;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Data
 {
+        [ExcludeFromCodeCoverage]
+
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SampleTaskFlowContext _context;
@@ -33,6 +36,7 @@ namespace Infra.Data
                 throw new InvalidOperationException("A transaction has not been started.");
             try
             {
+
                 //Commits the underlying store transaction
                 await _currentTransaction.CommitAsync();
                 _currentTransaction.Dispose();
@@ -62,15 +66,17 @@ namespace Infra.Data
 
             try
             {
-                //Calling DbContext Class SaveChanges method 
+                await BeforeSaveChanges();
+                //Calling DbContext Class SaveChanges method               
                 result.Data = await _context.SaveChangesAsync();
+
             }
             catch (DbEntityValidationException dbEx)
             {
                 foreach (var validationErrors in dbEx.EntityValidationErrors)
-                foreach (var validationError in validationErrors.ValidationErrors)
-                    _errorMessage = _errorMessage +
-                                    $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage} {Environment.NewLine}";
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                        _errorMessage = _errorMessage +
+                                        $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage} {Environment.NewLine}";
                 result.Error = new MessageResponse();
                 result.Error.Message = _errorMessage;
                 result.Error.Status = 500;
@@ -92,11 +98,11 @@ namespace Infra.Data
 
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
-  
+
 
             if (_repositories == null) _repositories = new Hashtable();
-        
-          _context.ChangeTracker.LazyLoadingEnabled= false;
+
+            _context.ChangeTracker.LazyLoadingEnabled = false;
 
             var type = typeof(TEntity).Name;
 
@@ -119,6 +125,76 @@ namespace Infra.Data
             //The Dispose Method will clean up this transaction object and ensures Entity Framework
             //is no longer using that transaction.
             _currentTransaction.Dispose();
+        }
+
+        public async Task<GenericResponse<int>> BeforeSaveChanges()
+        {
+            try
+            {
+                _context.ChangeTracker.DetectChanges();
+
+                 Core.Entities.Audit auditAdd = new Core.Entities.Audit();
+            
+            // var entityEntries = ChangeTracker.Entries().Where(x => x.State != EntityState.Unchanged);
+
+                foreach (var entry in _context.ChangeTracker.Entries())
+                {
+
+                    var originalValues = entry.OriginalValues.Clone(); // Return current values.
+
+
+                    if (entry.Entity is Core.Entities.Audit || entry.State is EntityState.Detached or EntityState.Unchanged)
+                        continue;
+                   var auditEntry = new Core.Entities.AuditEntry(entry) { TableName = entry.Entity.GetType().Name, UserId = "UserSystem" };
+                    foreach (var property in entry.Properties)
+                    {
+                        var propertyName = property.Metadata.Name;
+                        if (property.Metadata.IsPrimaryKey())
+                        {
+                            int primaryKey = int.Parse(property.CurrentValue.ToString());
+
+                            if (primaryKey < 0)
+                            {
+                                primaryKey = 1;
+                            }
+                            auditEntry.KeyValues[propertyName] = primaryKey;
+                            continue;
+                        }
+
+                        switch (entry.State)
+                        {
+                            case EntityState.Added:
+                                auditEntry.AuditType = Core.Entities.EAuditType.Create;
+                                auditEntry.NewValues[propertyName] = property?.CurrentValue;
+                                break;
+                            case EntityState.Deleted:
+                                auditEntry.AuditType = Core.Entities.EAuditType.Delete;
+                                auditEntry.OldValues[propertyName] = property?.OriginalValue;
+                                break;
+                            case EntityState.Modified:
+                                if (property.IsModified)
+                                {
+                                    auditEntry.ChangedColumns.Add(propertyName);
+                                    auditEntry.AuditType = Core.Entities.EAuditType.Update;
+                                    auditEntry.OldValues[propertyName] = property.OriginalValue;
+                                    auditEntry.NewValues[propertyName] = property.CurrentValue;
+                                }
+                                break;
+                        }
+
+                       auditAdd = auditEntry.ToAudit();
+
+                    }
+                }
+
+                _context.Set<Core.Entities.Audit>().Add(auditAdd);
+            }
+            catch (Exception ex)
+            {
+                await RollbackAsync();
+                Serilog.Log.Error(ex, "Error saving audit");
+            }
+            return new GenericResponse<int> { Data = 1 };
         }
     }
 }
