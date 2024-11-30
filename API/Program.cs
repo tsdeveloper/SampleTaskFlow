@@ -9,7 +9,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
 
-    //builder.Host.AddSerilog(builder.Configuration, "Sample Audit");
+    builder.Host.AddSerilog(builder.Configuration, "Sample Audit");
 
     //Log.Information("Getting the motors running...");
     var configuration = builder.Configuration;
@@ -38,20 +38,20 @@ try
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
+    //if (app.Environment.IsDevelopment())
+    //{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    //}
+    try
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        DbInitializer.InitDb(app, false);
     }
-    //try
-    //{
-    //    DbInitializer.InitDb(app, false);
-    //}
-    //catch (Exception ex)
-    //{
+    catch (Exception ex)
+    {
 
-    //    Console.WriteLine(ex);
-    //}
+        Console.WriteLine(ex);
+    }
     app.UseHttpsRedirection();
     app.UseRouting();
     app.MapControllers();

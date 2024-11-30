@@ -1,2 +1,5 @@
 docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=senha@123" -e "MSSQL_PID=Developer" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/azure-sql-edge
-docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=senha@123" -e "MSSQL_PID=Developer" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/mssql/server    
+   docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=senha@123" --network localdev -p 1433:1433 --name sqlserver-2022 --hostname sqlserver-2022  -d mcr.microsoft.com/mssql/server:2022-latest
+ docker build -f API\DockerFile . --force-rm -t taskflow
+ docker run -d --network localdev  -p 5000:8080 -e "ASPNETCORE_ENVIRONMENT=Development" --name taskflow taskflow
+ docker run -d --network localdev  -p 5000:8080 --name taskflow taskflow
