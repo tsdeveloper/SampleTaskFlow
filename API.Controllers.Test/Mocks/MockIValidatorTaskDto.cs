@@ -19,7 +19,7 @@ namespace API.Controllers.Test.Mocks
             return mock;
         }
 
-        public static Mock<IValidator<TaskUpdateDto>> MockTaskUpdateDto(this Mock<IValidator<TaskUpdateDto>> mock, ValidationResult @return)
+        public static Mock<IValidator<TaskUpdateDto>> MockValidateTaskUpdateDto(this Mock<IValidator<TaskUpdateDto>> mock, ValidationResult @return)
         {
             mock.Setup(m => m.Validate(It.IsAny<TaskUpdateDto>())).Returns(@return);
             return mock;

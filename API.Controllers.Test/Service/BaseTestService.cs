@@ -123,10 +123,10 @@ namespace API.Controllers.Test.Service
                 // Register a new DBContext that will use our test connection string
                 var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
                 string? connString = GetConnectionString(config);
-                services.AddSqlServer<SampleTaskFlowContext>(connString);
+                services.AddSqlServer<SampleTaskFlowContext>("InMemoryArticleDatabase");
 
                 // Delete the database (if exists) to ensure we start clean
-                SampleTaskFlowContext dbContext = CreateDbContext(services);
+                SampleTaskFlowContext dbContext = new InMemoryDbContextFactory().GetDbContext();
             });
         }
         private static string? GetConnectionString(IConfiguration config)

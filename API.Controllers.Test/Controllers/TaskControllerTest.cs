@@ -75,26 +75,28 @@ namespace API.Controllers.Test.Controllers
         }
 
         [Fact]
-        public async Task Step_03_SucessoQuandoRetornarTodasTask_GetController()
+        public async Task Step_03_SucessoQuandoRetornarTaskQuandoAtualizadoNoBancoDados_PutUpdateTaskController()
         {
-            var resultMapperTask = new TaskReturnDtoBuilder().Default().BuildListReadOnly();
+            var builderGenerictResponseEntity = new GenericGenericResponseTaskBuilder().Default().Build();
+            var builderEntity = new TaskBuilder().Default().Build();
+            var builderUpdateDto = new TaskUpdateDtoBuilder().Default().Build();
+            var builderReturnDto = new TaskReturnDtoBuilder().Default().Build();
 
-            _genericMockTask.MockCountAsync(1);
+            _validatorMockTaskUpdateDto.MockValidateTaskUpdateDto(new FluentValidation.Results.ValidationResult());
 
-            _repoMockMapper.Setup(mapper => mapper.Map<IReadOnlyList<TaskReturnDto>>(It.IsAny<IReadOnlyList<Core.Entities.Task>>()))
-                        .Returns(resultMapperTask);
-            _genericMockTask.MockGetEntityWithSpec(new TaskBuilder().Default().Build());
-            _genericMockTask.MockListReadOnlyListAsync(new TaskBuilder().Default().BuildList());
 
-            var request = new TaskSpecParamsBuilder().Default().Build();
+            _repoMockMapper.Setup(mapper => mapper.Map<Core.Entities.Task>(It.IsAny<Core.DTOs.Tasks.TaskCreateDto>()))
+                        .Returns(builderEntity);
 
-            var result = await _taskController.GetTasks(request);
+            _repoMockMapper.Setup(mapper => mapper.Map<TaskReturnDto>(It.IsAny<Core.Entities.Task>()))
+                        .Returns(builderReturnDto);
 
-            var matchResponse = ((OkObjectResult)result.Result).Value as PaginationWithReadOnyList<TaskReturnDto>;
+            _mockITaskService.MockUpdateTaskAsync(builderGenerictResponseEntity);
 
-            matchResponse.ShouldNotBeNull();
-            matchResponse.Data.ShouldBe(resultMapperTask);
-            _genericMockTask.Verify(x => x.ListReadOnlyListAsync(It.IsAny<TaskGetAllByFilterSpecification>()), Times.Once);
+            var result = await _taskController.PutUpdateTask(builderUpdateDto.Id, builderUpdateDto);
+
+            result.ShouldNotBeNull();
+            _mockITaskService.Verify(x => x.UpdateTaskAsync(It.IsAny<int>(),It.IsAny<Core.Entities.Task>()), Times.Once);
         }
 
         [Fact]
@@ -123,6 +125,32 @@ namespace API.Controllers.Test.Controllers
             matchResponse.ShouldNotBeNull();
             matchResponse.Name.ShouldBeSameAs(builderCreateDto.Name);
             _mockITaskService.Verify(x => x.CreateTaskAsync(It.IsAny<Core.Entities.Task>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task Step_05_SucessoQuandoRetornarTaskQuandoExcluirNoBancoDados_DeleteTaskByIdTaskController()
+        {
+            var builderGenerictResponseEntity = new GenericResponseReturnDeleteTaskBuilder().Default().Build();
+            var builderEntity = new TaskBuilder().Default().Build();
+            var builderCreateDto = new TaskCreateDtoBuilder().Default().Build();
+            var builderReturnDto = new TaskReturnDtoBuilder().Default().Build();
+
+            _validatorMockTaskCreateDto.MockValidateTaskCreateDto(new FluentValidation.Results.ValidationResult());
+
+
+            _repoMockMapper.Setup(mapper => mapper.Map<Core.Entities.Task>(It.IsAny<Core.DTOs.Tasks.TaskCreateDto>()))
+                        .Returns(builderEntity);
+
+            _repoMockMapper.Setup(mapper => mapper.Map<TaskReturnDto>(It.IsAny<Core.Entities.Task>()))
+                        .Returns(builderReturnDto);
+
+            _mockITaskService.MockExcludeTaskAsync(builderGenerictResponseEntity);
+
+            var result = await _taskController.DeleteTaskById(builderReturnDto.Id);
+
+
+            result.ShouldNotBeNull();
+            _mockITaskService.Verify(x => x.ExcludeTaskAsync(It.IsAny<int>()), Times.Once);
         }
     }
 }

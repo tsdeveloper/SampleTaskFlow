@@ -9,9 +9,9 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
 
-    builder.Host.AddSerilog(builder.Configuration, "Sample Audit");
+    //builder.Host.AddSerilog(builder.Configuration, "Sample Audit");
 
-    Log.Information("Getting the motors running...");
+    //Log.Information("Getting the motors running...");
     var configuration = builder.Configuration;
 
     // Add services to the container.
@@ -43,15 +43,15 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-    try
-    {
-        DbInitializer.InitDb(app, false);
-    }
-    catch (Exception ex)
-    {
+    //try
+    //{
+    //    DbInitializer.InitDb(app, false);
+    //}
+    //catch (Exception ex)
+    //{
 
-        Console.WriteLine(ex);
-    }
+    //    Console.WriteLine(ex);
+    //}
     app.UseHttpsRedirection();
     app.UseRouting();
     app.MapControllers();

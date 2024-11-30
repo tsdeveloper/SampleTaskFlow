@@ -24,9 +24,9 @@ namespace API.Controllers.Test.Mocks
             return mock;
         }
 
-        public static Mock<ITaskService> MockExcludeTaskAsync(this Mock<ITaskService> mock)
+        public static Mock<ITaskService> MockExcludeTaskAsync(this Mock<ITaskService> mock, GenericResponse<bool> @return)
         {
-            mock.Setup(m => m.ExcludeTaskAsync(It.IsAny<int>()));
+            mock.Setup(m => m.ExcludeTaskAsync(It.IsAny<int>())).ReturnsAsync(@return);
             return mock;
         }
     }
