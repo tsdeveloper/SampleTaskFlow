@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
-using Core.DTOs.Assuntos;
+using Core.DTOs.Projects;
 using Core.Entities;
 
 namespace Core.AutoMapper.Projects

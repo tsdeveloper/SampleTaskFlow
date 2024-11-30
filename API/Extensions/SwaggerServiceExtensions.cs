@@ -10,7 +10,7 @@ namespace API.Extensions
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Livro Store API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Task Flow API", Version = "v1" });
             });
 
             return services;
@@ -19,7 +19,7 @@ namespace API.Extensions
         public static IApplicationBuilder UserSwaggerDocumentation(this IApplicationBuilder app)
         {
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Livro Store API v1"); });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Flow v1"); });
 
             return app;
         }

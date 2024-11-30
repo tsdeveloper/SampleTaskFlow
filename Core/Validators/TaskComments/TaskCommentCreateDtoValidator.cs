@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Core.DTOs.Autors;
+using Core.DTOs.TaskComments;
 using FluentValidation;
 
 namespace Core.Validators.TaskComments

@@ -3,12 +3,11 @@ using Core.DTOs.Tasks;
 
 namespace API.Controllers.Test.Builder.DTOs
 {
-    public class TaskReturnDtoBuilder : BaseBuilder<TaskReturnDto>
+    [ExcludeFromCodeCoverage]
+    public class TaskCreateDtoBuilder : BaseBuilder<TaskCreateDto>
     {
-        [ExcludeFromCodeCoverage]
-        public TaskReturnDtoBuilder Default()
+        public TaskCreateDtoBuilder Default()
         {
-             _instance.Id = 1;
             _instance.Name = "Task1";
             _instance.Description = "Task1";
             _instance.ProjectId = 1;

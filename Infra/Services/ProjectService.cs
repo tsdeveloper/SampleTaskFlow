@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
 using Core.DTOs;
-using Core.DTOs.Assuntos;
+using Core.DTOs.Projects;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Interfaces.Services.Projects;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Infra.Services
 {
-      [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 
     public class ProjectService : IProjectService
     {

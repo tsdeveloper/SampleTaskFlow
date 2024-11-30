@@ -221,39 +221,18 @@ var assemblies = [
   {
     "name": "API",
     "classes": [
-      { "name": "API.Controllers.AuditController", "rp": "API_AuditController.html", "cl": 0, "ucl": 14, "cal": 14, "tl": 51, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "API.Controllers.ProjectsController", "rp": "API_ProjectsController.html", "cl": 0, "ucl": 48, "cal": 48, "tl": 139, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "API.Controllers.TaskCommentsController", "rp": "API_TaskCommentsController.html", "cl": 0, "ucl": 50, "cal": 50, "tl": 140, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "API.Controllers.TasksController", "rp": "API_TasksController.html", "cl": 23, "ucl": 37, "cal": 60, "tl": 172, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "API.Extensions.CustomAssemblyLoadContext", "rp": "API_CustomAssemblyLoadContext.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 21, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "API.Controllers.TasksController", "rp": "API_TasksController.html", "cl": 24, "ucl": 34, "cal": 58, "tl": 168, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "Core",
     "classes": [
-      { "name": "Core.DTOs.GenericResponse<T>", "rp": "Core_GenericResponse_1.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.DTOs.MessageResponse", "rp": "Core_MessageResponse.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 13, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.DTOs.Tasks.TaskCreateDto", "rp": "Core_TaskCreateDto.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 52, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.DTOs.Tasks.TaskFullReturnDto", "rp": "Core_TaskFullReturnDto.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 52, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.DTOs.Tasks.TaskReturnDto", "rp": "Core_TaskReturnDto.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 52, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.DTOs.Tasks.TaskUpdateDto", "rp": "Core_TaskUpdateDto.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 52, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Entities.AppConfig", "rp": "Core_AppConfig.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Entities.Audit", "rp": "Core_Audit.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 58, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Entities.AuditEntry", "rp": "Core_AuditEntry.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 58, "cb": 0, "tb": 6, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Entities.BaseEntity", "rp": "Core_BaseEntity.html", "cl": 0, "ucl": 10, "cal": 10, "tl": 27, "cb": 0, "tb": 6, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Entities.Project", "rp": "Core_Project.html", "cl": 0, "ucl": 14, "cal": 14, "tl": 33, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
       { "name": "Core.Entities.Task", "rp": "Core_Task.html", "cl": 10, "ucl": 5, "cal": 15, "tl": 37, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Entities.TaskComment", "rp": "Core_TaskComment.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 19, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Entities.TaskReport", "rp": "Core_TaskReport.html", "cl": 0, "ucl": 1, "cal": 1, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Helpers.Pagination<T>", "rp": "Core_Pagination_1.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 53, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Helpers.PaginationModulesWithReadOnyList<T>", "rp": "Core_PaginationModulesWithReadOnyList_1.html", "cl": 0, "ucl": 14, "cal": 14, "tl": 53, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Core.Helpers.PaginationWithReadOnyList<T>", "rp": "Core_PaginationWithReadOnyList_1.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 53, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "Infra",
     "classes": [
-      { "name": "Infra.Data.SampleTaskFlowContext", "rp": "Infra_SampleTaskFlowContext.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 45, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Infra.Data.SampleTaskFlowContextExtension", "rp": "Infra_SampleTaskFlowContextExtension.html", "cl": 0, "ucl": 19, "cal": 19, "tl": 45, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Infra.Data.UnitOfWork", "rp": "Infra_UnitOfWork.html", "cl": 0, "ucl": 124, "cal": 124, "tl": 197, "cb": 0, "tb": 40, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Infra.Data.SampleTaskFlowContext", "rp": "Infra_SampleTaskFlowContext.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 48, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Infra.Repositories.GenericRepository<T>", "rp": "Infra_GenericRepository_1.html", "cl": 10, "ucl": 28, "cal": 38, "tl": 75, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -262,35 +241,9 @@ var metrics = [{ "name": "Crap Score", "abbreviation": "crp", "explanationUrl": 
 var historicCoverageExecutionTimes = [];
 
 var riskHotspotMetrics = [
-      { "name": "Crap Score", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" },
-      { "name": "Cyclomatic complexity", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" },
 ];
 
 var riskHotspots = [
-  {
-    "assembly": "Infra", "class": "Infra.Data.UnitOfWork", "reportPath": "Infra_UnitOfWork.html", "methodName": "BeforeSaveChanges()", "methodShortName": "BeforeSaveChanges()", "fileIndex": 0, "line": 128,
-    "metrics": [
-      { "value": 600, "exceeded": true },
-      { "value": 24, "exceeded": true },
-    ]},
-  {
-    "assembly": "Core", "class": "Core.Entities.AuditEntry", "reportPath": "Core_AuditEntry.html", "methodName": "ToAudit()", "methodShortName": "ToAudit()", "fileIndex": 0, "line": 42,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "Core", "class": "Core.Entities.BaseEntity", "reportPath": "Core_BaseEntity.html", "methodName": "UpdateDate(Microsoft.EntityFrameworkCore.EntityState)", "methodShortName": "UpdateDate(...)", "fileIndex": 0, "line": 12,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
-  {
-    "assembly": "Infra", "class": "Infra.Data.UnitOfWork", "reportPath": "Infra_UnitOfWork.html", "methodName": "CommitAsync()", "methodShortName": "CommitAsync()", "fileIndex": 0, "line": 31,
-    "metrics": [
-      { "value": 42, "exceeded": true },
-      { "value": 6, "exceeded": false },
-    ]},
 ];
 
 var branchCoverageAvailable = true;

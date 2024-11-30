@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using Core.DTOs.Assuntos;
+using Core.DTOs.Projects;
 using FluentValidation;
 
 namespace Core.Validators.Projects

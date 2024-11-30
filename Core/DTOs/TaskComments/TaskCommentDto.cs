@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Core.DTOs.Tasks;
 
-namespace Core.DTOs.Autors
+namespace Core.DTOs.TaskComments
 {
     [ExcludeFromCodeCoverage]
     public class TaskCommentReturnDto

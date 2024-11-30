@@ -1,5 +1,5 @@
 using Core.DTOs;
-using Core.DTOs.Assuntos;
+using Core.DTOs.Projects;
 using Core.Entities;
 
 namespace Core.Interfaces.Services.Projects

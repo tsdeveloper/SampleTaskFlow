@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Core.DTOs.Tasks;
 using Core.Entities;
 
-namespace Core.DTOs.Assuntos
+namespace Core.DTOs.Projects
 {
     [ExcludeFromCodeCoverage]
     public class ProjectReturnDto

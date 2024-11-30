@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories
 {
-  [ExcludeFromCodeCoverage]
   public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
   {
     private readonly SampleTaskFlowContext _context;

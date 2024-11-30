@@ -10,8 +10,6 @@ using Core.Interfaces.Repositories.Tasks;
 using Core.Interfaces.Services.Projects;
 using Core.Interfaces.Services.TaskComments;
 using Core.Interfaces.Services.Tasks;
-using DinkToPdf;
-using DinkToPdf.Contracts;
 using FluentValidation;
 using Infra.Data;
 using Infra.Proxy;
@@ -34,7 +32,6 @@ namespace API.Extensions
             //CustomAssemblyLoadContext context = new CustomAssemblyLoadContext();
             //context.LoadUnmanagedLibrary(wkHtmlToPdfPath);
 
-            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
             var IsDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
             var connectionString = IsDevelopment

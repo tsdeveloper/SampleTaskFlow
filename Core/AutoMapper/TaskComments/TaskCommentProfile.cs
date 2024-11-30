@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using AutoMapper;
-using Core.DTOs.Autors;
+using Core.DTOs.TaskComments;
 using Core.Entities;
 
 namespace Core.AutoMapper.TaskComments

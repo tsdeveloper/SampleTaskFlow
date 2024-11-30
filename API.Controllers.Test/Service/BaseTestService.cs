@@ -9,10 +9,11 @@ using Core.Interfaces.Repositories.Tasks;
 using Core.Interfaces.Services.Projects;
 using Core.Interfaces.Services.TaskComments;
 using Core.Interfaces.Services.Tasks;
-using DinkToPdf.Contracts;
 using FluentValidation;
 using Infra.Data;
+using Infra.Repositories;
 using Infra.Services;
+using Infra.TemplateMethod;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -33,18 +34,29 @@ namespace API.Controllers.Test.Service
         private readonly WebApplicationFactory<Program> _factory;
 
         protected Mock<ITaskCommentRepository> _repoMockTaskComment;
+        protected Mock<SampleTaskFlowContext> _contextMockSampleTaskFlowContext;
         protected Mock<IGenericRepository<Core.Entities.Task>> _genericMockTask;
-        protected Mock<ITaskRepository> _reporMockTask;
+        protected Mock<ITaskRepository> _mockTaskRepository;
+        protected Mock<TaskRepository> _repoMockTaskRepository;
         protected Mock<IProjectRepository> _reporMockProject;
         protected Mock<IValidator<TaskCreateDto>> _validatorMockTaskCreateDto;
         protected Mock<IValidator<TaskUpdateDto>> _validatorMockTaskUpdateDto;
         protected Mock<IUnitOfWork> _repoMockUnitOfWork;
         protected Mock<IMapper> _repoMockMapper;
-        protected Mock<IConverter> _repoMockConverter;
         protected ITaskCommentRepository _repoTaskComment => _repoMockTaskComment.Object;
         protected TaskService _serviceTask;
         protected readonly HttpClient _httpClient;
         protected Mock<IOptions<AppConfig>> _repoMockOptionsAppConfig;
+        protected Mock<ProjectValidateLimit> _repoMockProjectValidateLimit;
+        protected Mock<TaskTemplateMethod> _repoMockTaskTemplateMethod;
+        protected Mock<GenericRepository<Core.Entities.Task>> _mockGenericRepository;
+        protected DbContextOptions _contextDbContextOptions => new DbContextOptionsBuilder().Options;
+        protected TaskRepository _repoTaskRepository;
+        private SampleTaskFlowContext _dbContext;
+        private AppConfig _appConfig => new AppConfig { MaxLimitTask = 20 };
+        protected GenericRepository<Core.Entities.Task> _repoGenericRepository;
+        protected Mock<DbContextOptions<SampleTaskFlowContext>> _mockDbContextOptions;
+        protected Mock<ITaskService> _mockITaskService;
 
 
         public BaseTestService()
@@ -66,15 +78,19 @@ namespace API.Controllers.Test.Service
             _validatorMockTaskUpdateDto = new Mock<IValidator<TaskUpdateDto>>();
             _repoMockUnitOfWork = new Mock<IUnitOfWork>();
             _repoMockMapper = new Mock<IMapper>();
-            _repoMockConverter = new Mock<IConverter>();
-            _reporMockTask = new Mock<ITaskRepository>();
+            _mockTaskRepository = new Mock<ITaskRepository>();
             _reporMockProject = new Mock<IProjectRepository>();
             _repoMockOptionsAppConfig = new Mock<IOptions<AppConfig>>();
+            _mockITaskService = new Mock<ITaskService>();
+
         }
 
         private void LoadApplicationServices()
         {
-            _serviceTask = new TaskService(_repoMockUnitOfWork.Object, _repoMockMapper.Object, _reporMockTask.Object, _repoMockOptionsAppConfig.Object);
+            _serviceTask = new TaskService(_repoMockUnitOfWork.Object, _repoMockMapper.Object, _mockTaskRepository.Object, _repoMockOptionsAppConfig.Object);
+            _dbContext = new InMemoryDbContextFactory().GetDbContext();
+            _repoTaskRepository = new TaskRepository(_dbContext);
+            _repoGenericRepository = new GenericRepository<Core.Entities.Task>(_dbContext);
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -127,5 +143,31 @@ namespace API.Controllers.Test.Service
             return dbContext;
         }
 
+    }
+
+    public static class DbContextMock
+    {
+        public static SampleTaskFlowContext GetInMemoryContext()
+        {
+            var options = new DbContextOptionsBuilder<SampleTaskFlowContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Garante que o banco seja único para cada teste
+                .Options;
+
+            return new SampleTaskFlowContext(options);
+        }
+    }
+
+    public class InMemoryDbContextFactory
+    {
+        public SampleTaskFlowContext GetDbContext()
+        {
+            var options = new DbContextOptionsBuilder<SampleTaskFlowContext>()
+                            .UseInMemoryDatabase(databaseName: "InMemoryArticleDatabase")
+                            // and also tried using SqlLite approach. But same issue reproduced.
+                            .Options;
+            var dbContext = new SampleTaskFlowContext(options);
+
+            return dbContext;
+        }
     }
 }

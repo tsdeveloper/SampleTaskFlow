@@ -29,7 +29,8 @@ public class Audit
     public string AffectedColumns { get; set; }
     public string PrimaryKey { get; set; }
 }
-
+     
+    [ExcludeFromCodeCoverage]
 public class AuditEntry 
 {
     public AuditEntry(EntityEntry entry) => Entry = entry;

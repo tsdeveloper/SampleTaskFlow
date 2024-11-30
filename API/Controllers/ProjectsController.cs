@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using API.Errors;
 using AutoMapper;
-using Core.DTOs.Assuntos;
+using Core.DTOs.Projects;
 using Core.DTOs.Tasks;
 using Core.Entities;
 using Core.Helpers;
@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-        [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 
     [Route("api/[controller]")]
     public class ProjectsController : BaseApiController

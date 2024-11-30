@@ -11,14 +11,11 @@ using Core.Interfaces.Repositories.Tasks;
 using Core.Interfaces.Services.Tasks;
 using Core.Specification.Tasks;
 using Core.Specification.Tasks.SpecParams;
-using DinkToPdf.Contracts;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using PugPdf.Core;
 
 namespace API.Controllers
 {
-    [ExcludeFromCodeCoverage]
     [Route("api/[controller]")]
     public class TasksController : BaseApiController
     {
@@ -27,7 +24,6 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly IValidator<TaskCreateDto> _validatorTaskCreateDto;
         private readonly IValidator<TaskUpdateDto> _validatorTaskUpdateDto;
-        private readonly IConverter _converter;
         private readonly ITaskRepository _repoTask;
         private readonly IProjectRepository _repoProject;
         private readonly ITaskCommentRepository _repoTaskComment;
@@ -35,7 +31,6 @@ namespace API.Controllers
         public TasksController(IGenericRepository<Core.Entities.Task> genericTask,
             ITaskService serviceTask, IMapper mapper, IValidator<TaskCreateDto> validatorTaskCreateDto,
             IValidator<TaskUpdateDto> validatorTaskUpdateDto,
-            IConverter converter,
             ITaskRepository repoTask,
             IProjectRepository repoProject, ITaskCommentRepository repoTaskComment)
         {
@@ -44,7 +39,6 @@ namespace API.Controllers
             _mapper = mapper;
             _validatorTaskCreateDto = validatorTaskCreateDto;
             _validatorTaskUpdateDto = validatorTaskUpdateDto;
-            _converter = converter;
             _repoTask = repoTask;
             _repoProject = repoProject;
             _repoTaskComment = repoTaskComment;

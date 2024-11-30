@@ -15,6 +15,7 @@ public class SampleTaskFlowContext : DbContext
     m.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
   }
 }
+    [ExcludeFromCodeCoverage]
 
 public static class SampleTaskFlowContextExtension
 {

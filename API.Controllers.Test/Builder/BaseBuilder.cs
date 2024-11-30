@@ -6,5 +6,6 @@ namespace API.Controllers.Test.Builder
 
         public T Build() => _instance;
         public List<T> BuildList() => new List<T> { _instance };
+        public IReadOnlyList<T> BuildListReadOnly() => new List<T> { _instance };
     }
 }

@@ -1,5 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Core.Helpers
 {
+        [ExcludeFromCodeCoverage]
+
     public class PaginationWithReadOnyList<T> where T : class
     {
         public PaginationWithReadOnyList(int pageIndex, int pageSize, int count, IReadOnlyList<T> data)
@@ -16,6 +20,8 @@ namespace Core.Helpers
         public IReadOnlyList<T> Data { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
+
     public class Pagination<T> where T : class
     {
         public Pagination(int pageIndex, int pageSize, int count, IList<T> data)
@@ -31,6 +37,8 @@ namespace Core.Helpers
         public int Count { get; set; }
         public IList<T> Data { get; set; }
     }
+
+    [ExcludeFromCodeCoverage]
 
     public class PaginationModulesWithReadOnyList<T> where T : class
     {

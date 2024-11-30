@@ -1,11 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
-using Core.DTOs.Assuntos;
-using Core.DTOs.Autors;
+using Core.DTOs.Projects;
+using Core.DTOs.TaskComments;
 using Core.Entities;
 
 namespace Core.DTOs.Tasks
-{ 
-       [ExcludeFromCodeCoverage]
+{
+    [ExcludeFromCodeCoverage]
 
     public class TaskReturnDto
     {
