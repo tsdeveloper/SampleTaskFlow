@@ -221,7 +221,7 @@ var assemblies = [
   {
     "name": "API",
     "classes": [
-      { "name": "API.Controllers.TasksController", "rp": "API_TasksController.html", "cl": 24, "ucl": 34, "cal": 58, "tl": 168, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "API.Controllers.TasksController", "rp": "API_TasksController.html", "cl": 52, "ucl": 6, "cal": 58, "tl": 168, "cb": 5, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
   {
     "name": "Core",
@@ -231,8 +231,7 @@ var assemblies = [
   {
     "name": "Infra",
     "classes": [
-      { "name": "Infra.Data.SampleTaskFlowContext", "rp": "Infra_SampleTaskFlowContext.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 48, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "Infra.Repositories.GenericRepository<T>", "rp": "Infra_GenericRepository_1.html", "cl": 10, "ucl": 28, "cal": 38, "tl": 75, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Infra.Data.SampleTaskFlowContext", "rp": "Infra_SampleTaskFlowContext.html", "cl": 1, "ucl": 4, "cal": 5, "tl": 48, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
 

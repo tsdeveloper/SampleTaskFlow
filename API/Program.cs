@@ -1,8 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using API.Extensions;
+using Core.Entities;
 using Infra.Seed;
+using Microsoft.Extensions.Options;
 using Serilog;
-    
+
 try
 {
 
@@ -43,15 +45,22 @@ try
     app.UseSwagger();
     app.UseSwaggerUI();
     //}
-    try
-    {
-        DbInitializer.InitDb(app, false);
-    }
-    catch (Exception ex)
-    {
 
-        Console.WriteLine(ex);
+    var appConfig = builder.Services.BuildServiceProvider().GetService<IOptions<AppConfig>>();
+
+    if (appConfig.Value != null && appConfig.Value.EnabledUpdateMigration)
+    {
+        try
+        {
+            DbInitializer.InitDb(app, false);
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex);
+        }
     }
+
     app.UseHttpsRedirection();
     app.UseRouting();
     app.MapControllers();

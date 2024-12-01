@@ -11,5 +11,6 @@ namespace Core.Entities
     public class AppConfig
     {
         public int MaxLimitTask { get; set; }
+        public bool EnabledUpdateMigration { get; set; }
     }
 }

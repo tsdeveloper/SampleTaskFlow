@@ -3,6 +3,7 @@
 ### 1. Pré-requisitos
 
 - Instalar o DotNet Core SDK 8
+  - [.NET SDK Downdload](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - Pacotes de Dependências instalados nos Projetos.
   ```bash
   dotnet add package AutoMapper
@@ -22,6 +23,8 @@
   dotnet add Microsoft.AspNetCore.Mvc.Testing
   ```
 - Instalar o Docker Desktop ou docker cli (Linux ou MacOs)
+  - [Docker Downdload](https://www.docker.com/products/docker-desktop/)
+
 - Criar a rede local do Docker e criar o container do SQL Server
 
   ```bash
@@ -30,7 +33,7 @@
   docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=senha@123" --network localdev -p 1433:1433 --name sqlserver-2022 --hostname sqlserver-2022 -d mcr.microsoft.com/mssql/server:2022-latest
   ```
 
-* Abra a pasta root do projeto no terminal e rode o comando bash abaixo para build o projeto e criar a imagem docker
+* Abra a pasta root do projeto no terminal e rode o comando bash abaixo para buildar o projeto e criar a imagem docker
   ```bash
   docker build -f API\DockerFile . --force-rm -t taskflow
   ```
@@ -38,16 +41,20 @@
   ```bash
   docker run -d --network localdev  -p 5000:8080 -e "ASPNETCORE_ENVIRONMENT=Development" --name taskflow taskflow
   ```
-
+### 2. Unit Testing
+1. Ambiente Linux ou MacOS
+    + Existe um software se precisar instalar parar gerar a transcrição dos arquivo coverage.cobertura.xml, que é gerado pelo dotnet cli `dotnet test --collect:"XPlat Code Coverage"`, chamado ReportGenerator [ReportGenerator(https://github.com/danielpalme/ReportGenerator)]. Na pasta Report você encontrará uma imagem de como é o gráfico.
+2. Ambiente Linux ou MacOS
+   + Caso utilize Windows na própria IDE do Visual Studio 2022 tem a ferramenta de teste e teste coverage.
 ## OBSERVAÇÃO
 
-O projeto está com as connections strings apontando para o Docker, caso deseja executar localmente, é necessário apontar para o servidor corretor.
+O projeto está com as connections strings apontando para o Docker, caso deseja executar localmente, é necessário apontar para o servidor correto.
 
 ## Fase 2: Refinamento
 
 - O projeto poderia incluir o vínculo de épicos associados nas tarefas e no futuro termos o mapeamento das funcionalidades desenvolvidas.
 - Seria interessante criarmos campos que possamos rastrear as PRs que foram feitos MERGED em PROD, assim garantirmos o rastreio do bug.
-- Outro detalhe não menos importante, a inclussão de funcionalidade de upload de Arquivos, assim temos os scripts a disposição, quando a tarefa utilizar tecnologia de Banco de Dados.
+- Outro detalhe não menos importante, a inclussão de funcionalidade de upload de Arquivos, assim temos os históricos de scripts que foram executados em PROD, quando a tarefa utilizar tecnologia de Banco de Dados.
 
 ## Fase 3: Final
 
