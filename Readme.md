@@ -43,7 +43,7 @@
   ```
 ### 2. Unit Testing
 1. Ambiente Linux ou MacOS
-    + Existe um software se precisar instalar parar gerar a transcrição dos arquivo coverage.cobertura.xml, que é gerado pelo dotnet cli `dotnet test --collect:"XPlat Code Coverage"`, chamado ReportGenerator [ReportGenerator(https://github.com/danielpalme/ReportGenerator)]. Na pasta Report você encontrará uma imagem de como é o gráfico.
+    + Existe um software se precisar instalar parar gerar a transcrição dos arquivo coverage.cobertura.xml, que é gerado pelo dotnet cli `dotnet test --collect:"XPlat Code Coverage"`, chamado ReportGenerator [ReportGenerator](https://github.com/danielpalme/ReportGenerator). Na pasta Report você encontrará uma imagem de como é o gráfico.
 2. Ambiente Linux ou MacOS
    + Caso utilize Windows na própria IDE do Visual Studio 2022 tem a ferramenta de teste e teste coverage.
 ## OBSERVAÇÃO
